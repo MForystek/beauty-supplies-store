@@ -1,0 +1,13 @@
+# syntax=docker/dockerfile:1
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 as build-and-run
+WORKDIR /src
+COPY src/*.csproj .
+RUN dotnet restore
+COPY src .
+ENV ASPNETCORE_URLS=http://+:1235
+ENV ASPNETCORE_ENVIRONMENT=Development
+EXPOSE 1235
+RUN dotnet build beauty-supplies-store.csproj -c Release -o /app
+WORKDIR /app
+ENTRYPOINT ["dotnet", "beauty-supplies-store.dll"]

@@ -1,0 +1,33 @@
+services:
+    db:
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?database password not set}
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
+
+    app:
+        build:
+            context: ./api
+        ports:
+            - 1234:1234
+        depends_on:
+            - db
+
+    app-test:
+        build:
+            context: ./api
+            dockerfile: Dockerfile-dev
+        ports:
+            - 1235:1235
+            - 5235:5235
+
+volumes:
+    postgres-data:
