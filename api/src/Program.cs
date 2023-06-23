@@ -12,7 +12,7 @@ public class Program
         // Add services to the container.
         builder.Services.AddAuthorization();
         builder.Services.AddDbContext<StoreContext>(options =>
-            options.UseNpgsql(builder.Configuration.GetConnectionString("StoreContext")));
+            options.UseNpgsql(GetConnectionStringFromEnvVariables()));
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
@@ -26,6 +26,7 @@ public class Program
             try
             {
                 var context = services.GetRequiredService<StoreContext>();
+                //TODO The following line creates the db if it don't exist. Decide to leave it or delete it.
                 var created = context.Database.EnsureCreated();
             }
             catch (Exception ex)
@@ -55,5 +56,31 @@ public class Program
         .WithName("GetProductsData");
 
         app.Run();
+    }
+
+    private static string GetConnectionStringFromEnvVariables()
+    {
+        var postgresDb = "POSTGRES_DB";
+        var postgresUser = "POSTGRES_USER";
+        var postgresPassword = "POSTGRES_PASSWORD";
+        Dictionary<string, string?> envs = new Dictionary<string, string?>() {
+            {postgresDb, Environment.GetEnvironmentVariable(postgresDb)},
+            {postgresUser, Environment.GetEnvironmentVariable(postgresUser)},
+            {postgresPassword, Environment.GetEnvironmentVariable(postgresPassword)}
+        };
+        CheckIfEnvVariablesAreSet(envs);
+
+        return $"Host=db;Database={envs[postgresDb]};Username={envs[postgresUser]};Password={envs[postgresPassword]}";
+    }
+
+    private static void CheckIfEnvVariablesAreSet(Dictionary<string, string?> envs)
+    {
+        foreach (var env in envs)
+        {
+            if (env.Value is null)
+            {
+                throw new ArgumentNullException($"Env variable {env.Key} is not set.");
+            }
+        }
     }
 }

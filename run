@@ -1,0 +1,40 @@
+#!/bin/bash
+
+help()
+{
+    echo "Usage: ./run [ d/p | dev/prod ]
+             [ u/d | up/down ]"
+    exit 1
+}
+
+if [ $# -eq 1 ] && ([ "$1" = "-h" ] || [ "$1" = "--help" ]) || [ $# -ne 2 ]; then
+    help
+fi
+
+case "$1" in
+    d | dev)
+        COMPOSE_FILE="-f docker-compose-dev.yml"
+        ;;
+    p | prod)
+        COMPOSE_FILE=""
+        ;;
+    *)
+        echo "Unexpected option: $1"
+        help
+        ;;
+esac
+
+case "$2" in
+    u | up)
+        MODE="up --build"
+        ;;
+    d | down)
+        MODE=down
+        ;;
+    *)
+        echo "Unexpected option: $2"
+        help
+        ;;
+esac
+
+sudo docker compose $COMPOSE_FILE $MODE
