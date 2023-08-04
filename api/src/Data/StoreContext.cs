@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-namespace beauty_supplies_store.Data;
+namespace api.Data;
 
 public class StoreContext : DbContext
 {

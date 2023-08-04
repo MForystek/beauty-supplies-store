@@ -9,7 +9,7 @@ Website for beauty supplies store in Jasło.
 To run the project in development mode use:
 
 ```
-./run.sh dev up
+./run dev up
 ```
 
 or
@@ -19,17 +19,18 @@ docker compose -f docker-compose-dev.yml up --build
 ```
 
 Ports:  
-Api: `1235`  
+Api: `2234`  
+Product catalog: `2235`  
 Adminer: `8080`
 
-Swagger available on: `http://localhost:1235/swagger`
+Swagger available on: `http://localhost:<port>/swagger`
 
 ### **Prod mode**
 
 To run the project in production mode use:
 
 ```
-./run.sh prod up
+./run prod up
 ```
 
 or
@@ -39,7 +40,8 @@ docker compose up --build
 ```
 
 Ports:  
-Api: `1234`
+Api: `1234`  
+Product catalog: `1235`
 
 ## Env variables
 

@@ -1,7 +1,7 @@
-using beauty_supplies_store.Data;
-using beauty_supplies_store.Models;
+using api.Data;
+using api.Models;
 using Microsoft.EntityFrameworkCore;
-namespace beauty_supplies_store;
+namespace api;
 
 public class Program
 {
