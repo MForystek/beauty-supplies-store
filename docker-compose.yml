@@ -29,5 +29,10 @@ services:
         depends_on:
             - db
 
+    frontend:
+        container_name: frontend
+        build:
+            context: ./frontend
+
 volumes:
     postgres-data:
