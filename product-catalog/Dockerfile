@@ -9,7 +9,7 @@ RUN dotnet publish -c Release -o /publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 as runtime
 WORKDIR /publish
-ENV ASPNETCORE_URLS=http://+:1234
+ENV ASPNETCORE_URLS=http://+:1235
 COPY --from=build-env /publish .
-EXPOSE 1234
-ENTRYPOINT ["dotnet", "api.dll"]
+EXPOSE 1235
+ENTRYPOINT ["dotnet", "product-catalog.dll"]

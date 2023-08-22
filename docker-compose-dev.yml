@@ -24,6 +24,19 @@ services:
         depends_on:
             - db
 
+    product-catalog-dev:
+        container_name: product-container-dev
+        build:
+            context: ./product-catalog
+            dockerfile: Dockerfile-dev
+        env_file:
+            - .env-dev
+        ports:
+            - 2235:2235
+        depends_on:
+            - db
+            - db-filler
+
     api-dev:
         container_name: api-dev
         build:
@@ -32,7 +45,7 @@ services:
         env_file:
             - .env-dev
         ports:
-            - 1235:1235
+            - 2234:2234
         depends_on:
             - db
             - db-filler

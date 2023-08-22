@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace beauty_supplies_store.Models;
+namespace api.Models;
 
 [Table("products")]
 public class Product
