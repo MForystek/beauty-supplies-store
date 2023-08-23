@@ -3,8 +3,8 @@ import App from './App';
 
 // This test has no actual use, it's only for future reference.
 // Should be deleted after actual tests are made.
-// test('renders learn react link', () => {
+// test('example test', () => {
 //   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
+//   const linkElement = screen.getByText(/example element/i);
 //   expect(linkElement).toBeInTheDocument();
 // });

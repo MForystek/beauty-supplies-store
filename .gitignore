@@ -13,3 +13,7 @@ publish/
 .env*
 
 !.env-mock
+
+## frontend focused files
+# dependencies
+node_modules
