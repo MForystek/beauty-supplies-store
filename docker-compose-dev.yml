@@ -50,5 +50,22 @@ services:
             - db
             - db-filler
 
+    frontend-dev:
+        container_name: frontend-dev
+        image: frontend-dev-image
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        volumes:
+            - ./frontend:/frontend
+            - node_modules:/frontend/node_modules/
+        ports:
+            - "2236:3000"
+        environment:
+            - NODE_ENV=development
+            - WATCHPACK_POLLING=true
+            - CHOKIDAR_USEPOLLING=true
+
 volumes:
     postgres-data:
+    node_modules:
