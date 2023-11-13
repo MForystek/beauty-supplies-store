@@ -1,12 +1,22 @@
 services:
     db:
-        image: postgres:latest
+        image: postgres:15
         container_name: db
         restart: always
         env_file:
             - .env
         volumes:
             - postgres-data:/var/lib/postgresql/data
+
+    checkout:
+        container_name: checkout
+        build:
+            context: ./checkout
+        env_file: .env
+        ports:
+            - 1240:1240
+        depends_on:
+            - db
 
     product-catalog:
         container_name: product-catalog
@@ -33,7 +43,7 @@ services:
         container_name: frontend
         build:
             context: ./frontend
-            dockerfile: Dockerfile       
+            dockerfile: Dockerfile
         volumes:
             - ./frontend:/frontend
             - node_modules:/frontend/node_modules/

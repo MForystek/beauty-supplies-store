@@ -1,6 +1,6 @@
 services:
     db:
-        image: postgres:latest
+        image: postgres:15
         container_name: db
         restart: always
         env_file:
@@ -23,6 +23,19 @@ services:
             context: ./dbscripts
         depends_on:
             - db
+
+    checkout-dev:
+        container_name: checkout-dev
+        build:
+            context: ./checkout
+            dockerfile: Dockerfile-dev
+        env_file:
+            - .env-dev
+        ports:
+            - 2240:2240
+        depends_on:
+            - db
+            - db-filler
 
     product-catalog-dev:
         container_name: product-container-dev
