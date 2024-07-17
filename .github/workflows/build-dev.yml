@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - name: Checkout the repo
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Create env file
       run: |
         touch .env
@@ -23,7 +23,7 @@ jobs:
         echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
         echo POSTGRES_DB=${{ secrets.POSTGRES_DB }} >> .env
     - name: Build image
-      uses: isbang/compose-action@v1.4.1
+      uses: isbang/compose-action@v2.0.1
       with:
         compose-file: "./docker-compose.yml"
       
