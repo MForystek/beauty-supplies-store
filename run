@@ -2,8 +2,7 @@
 
 help()
 {
-    echo "Usage: ./run [ d/p | dev/prod ]
-             [ u/d | up/down ]"
+    echo "Usage: ./run [ d/p | dev/prod ] [ u/d | up/down ]"
     exit 1
 }
 
@@ -37,4 +36,5 @@ case "$2" in
         ;;
 esac
 
+sudo docker rmi $(sudo docker images --filter "dangling=true" -q --no-trunc)
 sudo docker compose $COMPOSE_FILE $MODE

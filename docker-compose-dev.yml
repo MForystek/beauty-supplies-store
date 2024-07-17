@@ -32,7 +32,7 @@ services:
         env_file:
             - .env-dev
         ports:
-            - 2240:2240
+            - 2233:80
         depends_on:
             - db
             - db-filler
@@ -45,7 +45,7 @@ services:
         env_file:
             - .env-dev
         ports:
-            - 2235:2235
+            - 2232:80
         depends_on:
             - db
             - db-filler
@@ -58,27 +58,22 @@ services:
         env_file:
             - .env-dev
         ports:
-            - 2234:2234
+            - 2231:80
         depends_on:
             - db
             - db-filler
 
-    frontend-dev:
-        container_name: frontend-dev
-        image: frontend-dev-image
+    next-frontend-dev:
+        container_name: next-frontend-dev
         build:
-            context: ./frontend
+            context: ./next-frontend
             dockerfile: Dockerfile
-        volumes:
-            - ./frontend:/frontend
-            - node_modules:/frontend/node_modules/
+        env_file:
+            - .env-dev
         ports:
-            - "2236:3000"
-        environment:
-            - NODE_ENV=development
-            - WATCHPACK_POLLING=true
-            - CHOKIDAR_USEPOLLING=true
+            - 2230:3000
+        depends_on:
+            - api-dev
 
 volumes:
     postgres-data:
-    node_modules:
