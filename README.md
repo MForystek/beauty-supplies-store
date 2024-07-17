@@ -19,9 +19,10 @@ docker compose -f docker-compose-dev.yml up --build
 ```
 
 Ports:  
-Api: `2234`  
-Product catalog: `2235`  
-Checkout: `2240`  
+Frontend: `2230`  
+Api: `2231`  
+Product catalog: `2232`  
+Checkout: `2233`  
 Adminer: `8080`
 
 Swagger available on: `http://localhost:<port>/swagger`
@@ -41,9 +42,10 @@ docker compose up --build
 ```
 
 Ports:  
-Api: `1234`  
-Product catalog: `1235`  
-Checkout: `1240`
+Frontend: `80`  
+Api: `1231`  
+Product catalog: `1232`  
+Checkout: `1233`
 
 ## Env variables
 

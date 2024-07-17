@@ -5,9 +5,9 @@ WORKDIR /src
 COPY src/*.csproj .
 RUN dotnet restore
 COPY src .
-ENV ASPNETCORE_URLS=http://+:2240
+ENV ASPNETCORE_URLS=http://+:80
 ENV ASPNETCORE_ENVIRONMENT=Development
-EXPOSE 2240
+EXPOSE 80
 RUN dotnet build checkout.csproj -c Release -o /app
 WORKDIR /app
 ENTRYPOINT ["dotnet", "checkout.dll"]
